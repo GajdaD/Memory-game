@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1.4em;
+    vertical-align: baseline;
+    text-decoration: none;
+    outline: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .img_row {
+        zoom: 0.35;
+    }
+}
+
+body {
+    font-family: 'Advent Pro', sans-serif;
+    background-color: #A4BCF4;
+}
+
+#menu {
+    margin: 0 auto;
+}
+
+#img_menu {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#p_menu {
+    color: #00257C;
+    font-size: 30px;
+    text-align: center;
+}
+
+#main {
+    text-align: center;
+}
+
+h1 {
+    color: #00257C;
+    text-align: center;
+}
+
+h2 {
+    font-size: 28px;
+    color: #920C0C;
+    text-align: center;
+}
+
+.img_row {
+    text-align: center;
+}
+
+img {
+    background-color: #4E79DB;
+}
+
+#timer_div {
+    margin: 0 auto;
+    width: 90%;
+    height: 30px;
+    background-color: #d9d9d9;
+    position: relative;
+}
+
+#timer_div_2 {
+    width: 100%;
+    height: 30px;
+    background-color: #4E79DB;
+    position: absolute;
+    z-index: 1;
+}
+
+#timer {
+    color: #00257C;
+    font-size: 25px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#reset {
+    background-color: #A4BCF4;
+    color: #00257C;
+    border: 1px solid #00257C;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

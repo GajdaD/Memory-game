@@ -3,55 +3,22 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <title>Memory</title>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-38766279-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-38766279-1');
-</script>
-    <style>
-        #pasek {
-            width: 500px;
-            height: 30px;
-            background-color: #d9d9d9;
-            position: relative;
-        }
-
-        #pasek2 {
-            width: 100%;
-            height: 30px;
-            background-color: #808080;
-            position: absolute;
-        }
-
-        #timer {
-            position: absolute;
-            font-size: 25px;
-            top: -22px;
-            left: 200px;
-        }
-
-        h2 {
-            font-size: 28px;
-            color: #920C0C;
-        }
-    </style>
     <script>
         function init(tryb) {
-
-            
             var main = document.getElementById("main"); // wyswietlenie maina
             main.style.display = "block";
             var menu = document.getElementById("menu") // ukrycie menu
             menu.style.display = "none";
 
-            var trybik = tryb;
+            var tryb_1 = tryb;
             document.querySelector("h1").innerText += " tryb :" + tryb + "s"; // wypisanie trybu gry
-            var tab = ["1.png", "1.png", "2.png", "2.png", "3.png", "3.png", "4.png", "4.png", "5.png", "5.png", "6.png", "6.png", "7.png", "7.png", "8.png", "8.png"];// pierwsza tablica z wszystkimi obrazkami
+            var tab = ["img/1.png", "img/1.png", "img/2.png", "img/2.png", "img/3.png", "img/3.png", "img/4.png", "img/4.png", "img/5.png", "img/5.png", "img/6.png", "img/6.png", "img/7.png", "img/7.png", "img/8.png", "img/8.png"]; // pierwsza tablica z wszystkimi obrazkami
 
             var el = document.getElementsByTagName("img");
 
@@ -66,32 +33,36 @@
             }
             var tab3 = []; // tablica do ktorej wpisujemy dwa wybrane elementy
             var klik = 0; // zmienna na klik 
-            var tab0 = ["0.png"]; // tablica, w ktorej jest tylko "odwrocony" obrazek 
+            var tab0 = ["img/0.png"]; // tablica, w ktorej jest tylko "odwrocony" obrazek 
             var jeden = 0;
             var dwa = 0;
             var tab4 = []; // tablica w ktorej wpisujemy odgadniete pary
             var flaga = false;
-            var f = function (x) {
-                return function () {
+            var f = function(x) {
+                return function() {
                     el[x].src = tab2[x]; // odkrycie obrazka
                     tab3.push(this) // wrzucenie do tablicy
                     klik++; // zwiekszenie klika 
 
                     if (flaga == false) { // sluzy do startu czasu razem z pierwszym klikiem
-                        czasik();
+                        czas();
                         flaga = true;
                     }
                     if (klik == 1) { // jesli jest to pierwszy klikniety obrazek
 
 
                         jeden = el[x];
-                        jeden.onclick = function () { return false; } // zabezpieczenie przed kliknieciem 2 razy w ten sam
+                        jeden.onclick = function() {
+                                return false;
+                            } // zabezpieczenie przed kliknieciem 2 razy w ten sam
                     }
 
                     if (klik == 2) { // drugi klik
                         for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla klikac innych obrazkow
 
-                            el[i].onclick = function () { return false; }
+                            el[i].onclick = function() {
+                                return false;
+                            }
                         }
 
                         dwa = el[x];
@@ -107,23 +78,25 @@
                             tab4.push(jeden) // wrzucenie do tablicy odkrytych
                             tab4.push(dwa) // to samo 
 
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 for (var i = 0; i < 16; i++) {
                                     el[i].onclick = f(i) // zastosowanie funkcji na klik od wszystkich
 
                                 }
                                 for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed klikaniem w odkryte juz pary
-                                    tab4[i].onclick = function () { return false; }
+                                    tab4[i].onclick = function() {
+                                        return false;
+                                    }
 
-                                }//////////////////////////// 
+                                } //////////////////////////// 
                             }, 600);
-                        }////////////////////////////
+                        } ////////////////////////////
 
                         if (tab3[0] != tab3[1] && klik == 2) { //zla para
 
                             klik = 0; // wyzerowanie klika 
 
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 tab3[0].src = tab0[0]; // zakrycie obrazka
                                 tab3[1].src = tab0[0]; // też 
                                 tab3.splice(0, 2); // wyczyszczenie tablicy 
@@ -133,11 +106,13 @@
 
                                 }
                                 for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed klikaniem w odkryte juz pary
-                                    tab4[i].onclick = function () { return false; }
+                                    tab4[i].onclick = function() {
+                                        return false;
+                                    }
 
-                                }//////////////////////////// 
+                                } //////////////////////////// 
                             }, 600);
-                        }////
+                        } ////
 
                         //        }, 600);
                         //////
@@ -151,10 +126,10 @@
 
             }
 
-            function czasik() {
+            function czas() {
 
                 //////
-                var countDownDate = new Date().getTime() + (1000 * trybik);// liczenie ile czasu ma byc
+                var countDownDate = new Date().getTime() + (1000 * tryb_1); // liczenie ile czasu ma byc
                 var tczas = new Date().getTime();
 
                 function zero(i) { // funkcja na wyswitlanie 0 przed
@@ -163,6 +138,7 @@
                     }
                     return i;
                 }
+
                 function zeroms(i) { // ta sama tylko dla milisekund
                     if (i < 100)
                         i = "0" + i;
@@ -171,62 +147,64 @@
                     return i;
                 }
                 var szer = 100; //szerokosc paska 
-                var timer = setInterval(function () {
-                    var d = new Date(); // data
+                var timer = setInterval(function() {
+                        var d = new Date(); // data
 
-                    var now = d.getTime(); // teraz 
+                        var now = d.getTime(); // teraz 
 
-                    var distance = countDownDate - now; //roznica pomiedzy teraz a tym ile chcemy
-                    var min = zero(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
-                    var sec = zero(Math.floor((distance % (1000 * 60)) / 1000)); // to samo dla sekund
-                    var msec = zeroms(Math.floor(distance % 1000)) // dla ms
+                        var distance = countDownDate - now; //roznica pomiedzy teraz a tym ile chcemy
+                        var min = zero(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
+                        var sec = zero(Math.floor((distance % (1000 * 60)) / 1000)); // to samo dla sekund
+                        var msec = zeroms(Math.floor(distance % 1000)) // dla ms
 
-                    var paski = document.getElementById("pasek2")
+                        var timer_2 = document.getElementById("timer_div_2")
 
-                    szer -= (4 / (10 * trybik)); // zmniejszamy o tyle procent 
-                    paski.style.width = szer + "%";
-                    if (szer < 0) {
-                        szer = 0;
-                    }
-                    var granica = (distance / 1000) // zamienia na sekundy 
+                        szer -= (4 / (10 * tryb_1)); // zmniejszamy o tyle procent 
+                        timer_2.style.width = szer + "%";
+                        if (szer < 0) {
+                            szer = 0;
+                        }
+                        var granica = (distance / 1000) // zamienia na sekundy 
 
-                    if (granica < (trybik / 5)) { // 20 % pozsotalego czasu
-                        paski.style.backgroundColor = "red";
-                    }
-
-                    if (distance >= 0) {
-                        document.getElementById("timer").innerHTML = min + " : " + sec + " : " + msec; // wyswietlanie czasu
-
-                    }
-                    if (distance < 0 && tab3.length != 2) { // jesli sie skonczy odliczanie ///////// PRZEGRANA 
-                        clearInterval(timer);
-                        document.getElementById("timer").innerHTML = "KONIEC"; // napis na zegarze koniec
-                        for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla klikac innych obrazkow
-                            el[i].onclick = function () { return false; }
+                        if (granica < (tryb_1 / 5)) { // 20 % pozsotalego czasu
+                            timer_2.style.backgroundColor = "red";
                         }
 
-                        document.querySelector("h2").innerText += " PRZEGRANA "
-                        var reset = document.getElementById("reset");// wyswietlenie przycisku reset
-                        reset.style.display = "block";
-                    }
-                    if (tab4.length == 16) { ////// WYGRANA ///////////////////////
-                        clearInterval(timer); // zatrzymanie zegara 
-                        var tczaskoniec = new Date().getTime(); // czas na koniec
-                        var twojczas = tczaskoniec - tczas // twoj czas
-                        var tmin = zero(Math.floor((twojczas % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
-                        var tsec = zero(Math.floor((twojczas % (1000 * 60)) / 1000)); // to samo dla sekund
-                        var tmsec = zeroms(Math.floor(twojczas % 1000)) // dla ms
-                        document.querySelector("h2").innerText += "WYGRANA ! Twój czas : " + tmin + " : " + tsec + " : " + tmsec; // wyswietlenie wygrana i czasu
-                        var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
-                        reset.style.display = "block";
-                    }
+                        if (distance >= 0) {
+                            document.getElementById("timer").innerHTML = min + " : " + sec + " : " + msec; // wyswietlanie czasu
 
-                }, 1)
-                /////////////////////////////////////////////////////////////
+                        }
+                        if (distance < 0 && tab3.length != 2) { // jesli sie skonczy odliczanie ///////// PRZEGRANA 
+                            clearInterval(timer);
+                            document.getElementById("timer").innerHTML = "KONIEC"; // napis na zegarze koniec
+                            for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla klikac innych obrazkow
+                                el[i].onclick = function() {
+                                    return false;
+                                }
+                            }
+
+                            document.querySelector("h2").innerText += " PRZEGRANA "
+                            var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
+                            reset.style.opacity = 1;
+                        }
+                        if (tab4.length == 16) { ////// WYGRANA ///////////////////////
+                            clearInterval(timer); // zatrzymanie zegara 
+                            var tczaskoniec = new Date().getTime(); // czas na koniec
+                            var twojczas = tczaskoniec - tczas // twoj czas
+                            var tmin = zero(Math.floor((twojczas % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
+                            var tsec = zero(Math.floor((twojczas % (1000 * 60)) / 1000)); // to samo dla sekund
+                            var tmsec = zeroms(Math.floor(twojczas % 1000)) // dla ms
+                            document.querySelector("h2").innerText += "WYGRANA ! Twój czas : " + tmin + " : " + tsec + " : " + tmsec; // wyswietlenie wygrana i czasu
+                            var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
+                            reset.style.opacity = 1;
+                        }
+
+                    }, 1)
+                    /////////////////////////////////////////////////////////////
             }
 
-        }//koniec init
-        function resecik() {
+        } //koniec init
+        function f_reset() {
             document.querySelector("h2").innerText = ""; //wyczyszczenie napisu
             document.querySelector("h1").innerText = "MEMORY"; // wrocenie do samego napisu memory
             var menu = document.getElementById("menu")
@@ -234,14 +212,14 @@
             var main = document.getElementById("main");
             main.style.display = "none"; // ukrycie maina 
             var reset = document.getElementById("reset");
-            reset.style.display = "none"; // ukrycie przycisku reset
-            var paski = document.getElementById("pasek2")
-            paski.style.backgroundColor = "#808080"; // zmiana koloru na standartowy czarny
-            paski.style.width = "100" + "%"; // ustawianie paska timera na cala szerokosc
+            reset.style.opacity = 0; // ukrycie przycisku reset
+            var timer_2 = document.getElementById("timer_div_2")
+            timer_2.style.backgroundColor = "#4E79DB"; // zmiana koloru na standartowy czarny
+            timer_2.style.width = "100" + "%"; // ustawianie paska timera na cala szerokosc
             document.getElementById("timer").innerHTML = ""; // wyczyszczenie napisu z timera
             var el = document.getElementsByTagName("img");
             for (var i = 0; i < 16; i++) { // zakrycie wszystkich obrazkow
-                el[i].src = "0.png";
+                el[i].src = "img/0.png";
             }
         }
     </script>
@@ -254,47 +232,46 @@
     <div id="main" style="display:none;position:relative;">
         <h1>MEMORY</h1>
         <h2></h2>
-        <button id="reset" style="display: none;margin:5px;" onclick="resecik()">RESET GRY</button>
-        <div id="pasek">
-            <div id="pasek2"> </div>
+        <button id="reset" style="opacity: 0;" onclick="f_reset()">RESET GRY</button>
+        <br>
+        <div id="timer_div">
             <p id="timer"></p>
+            <div id="timer_div_2"> </div>
         </div>
-        <div id="pierwszy">
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
+        <br>
+        <div class="img_row">
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
         </div>
-        <div id="drugi">
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
+        <div class="img_row">
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
         </div>
-        <div id="trzeci">
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
+        <div class="img_row">
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
         </div>
-        <div id="czwarty">
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
-            <img src="0.png" />
+        <div class="img_row">
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
         </div>
-        <p style="position:absolute;top:5px;left:860px;font-size:26px;">Popularna gra polegająca na odnajdowaniu par takich samych kart. <br>
-            Gracz odsłania 2 karty. <br> Jeśli są to takie same karty, zostaną one odsłonięte, jeśli nie, karty będą odwrócone z powrotem. <br>
-             Celem gracza jest zdjęcie wszystkich kart w najszybszym czasie. <br> </p>
     </div>
-    <div id="menu" style="position:relative;">
-        <img src="menu.png" alt="x" usemap="#Map" />
+    <div id="menu">
+        <img src="img/menu.png" alt="Error" usemap="#Map" id="img_menu" />
         <map name="Map" id="Map">
-            <area alt="3" title="3" onclick="init(30)" shape="rect" coords="61,102,239,140" />
-            <area alt="6" title="6" onclick="init(60)" shape="rect" coords="60,149,238,187" />
-            <area alt="9" title="9" onclick="init(90)" shape="rect" coords="60,195,238,233" />
+            <area alt="30" title="30" onclick="init(30)" shape="rect" coords="61,102,239,140" />
+            <area alt="60" title="60" onclick="init(60)" shape="rect" coords="60,149,238,187" />
+            <area alt="90" title="90" onclick="init(90)" shape="rect" coords="60,195,238,233" />
         </map>
-        <p style="position:absolute;top:5px;left:320px;font-size:30px;">Wybierz tryb w którym chcesz grać. <br> Im mniej sekund tym trudniejsza rozgrywka.</p>
+        <p id="p_menu"><br>Wybierz tryb w którym chcesz grać</p>
     </div>
 
 </body>
