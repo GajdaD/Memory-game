@@ -10,6 +10,7 @@
 
 body {
     font-family: 'Advent Pro', sans-serif;
+    background-color: #A4BCF4;
 }
 
 #menu {
@@ -23,6 +24,7 @@ body {
 }
 
 #p_menu {
+    color: #00257C;
     font-size: 30px;
     text-align: center;
 }
