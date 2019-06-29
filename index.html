@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Memory</title>
     <style>
         #pasek {
@@ -231,7 +232,7 @@
             }
 
         } //koniec init
-        function resecik() {
+        function f_reset() {
             document.querySelector("h2").innerText = ""; //wyczyszczenie napisu
             document.querySelector("h1").innerText = "MEMORY"; // wrocenie do samego napisu memory
             var menu = document.getElementById("menu")
@@ -259,7 +260,7 @@
     <div id="main" style="display:none;position:relative;">
         <h1>MEMORY</h1>
         <h2></h2>
-        <button id="reset" style="display: none;margin:5px;" onclick="resecik()">RESET GRY</button>
+        <button id="reset" style="display: none;margin:5px;" onclick="f_reset()">RESET GRY</button>
         <div id="pasek">
             <div id="pasek2"> </div>
             <p id="timer"></p>
