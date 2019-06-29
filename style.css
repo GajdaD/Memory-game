@@ -1,3 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1.4em;
+    vertical-align: baseline;
+    text-decoration: none;
+    outline: 0;
+}
+
+body {
+    font-family: 'Advent Pro', sans-serif;
+}
+
+#menu {
+    margin: 0 auto;
+}
+
+#img_menu {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#p_menu {
+    font-size: 30px;
+    text-align: center;
+}
+
 #pasek {
     width: 500px;
     height: 30px;

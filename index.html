@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="img/favicon.ico" />
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <title>Memory</title>
     <script>
         function init(tryb) {
@@ -32,7 +33,7 @@
             }
             var tab3 = []; // tablica do ktorej wpisujemy dwa wybrane elementy
             var klik = 0; // zmienna na klik 
-            var tab0 = ["0.png"]; // tablica, w ktorej jest tylko "odwrocony" obrazek 
+            var tab0 = ["img/0.png"]; // tablica, w ktorej jest tylko "odwrocony" obrazek 
             var jeden = 0;
             var dwa = 0;
             var tab4 = []; // tablica w ktorej wpisujemy odgadniete pary
@@ -263,14 +264,14 @@
         <p style="position:absolute;top:5px;left:860px;font-size:26px;">Popularna gra polegająca na odnajdowaniu par takich samych kart. <br> Gracz odsłania 2 karty. <br> Jeśli są to takie same karty, zostaną one odsłonięte, jeśli nie, karty będą odwrócone z powrotem. <br> Celem gracza jest zdjęcie wszystkich kart
             w najszybszym czasie. <br> </p>
     </div>
-    <div id="menu" style="position:relative;">
-        <img src="menu.png" alt="x" usemap="#Map" />
+    <div id="menu">
+        <img src="menu.png" alt="Error" usemap="#Map" id="img_menu" />
         <map name="Map" id="Map">
-            <area alt="3" title="3" onclick="init(30)" shape="rect" coords="61,102,239,140" />
-            <area alt="6" title="6" onclick="init(60)" shape="rect" coords="60,149,238,187" />
-            <area alt="9" title="9" onclick="init(90)" shape="rect" coords="60,195,238,233" />
+            <area alt="30" title="30" onclick="init(30)" shape="rect" coords="61,102,239,140" />
+            <area alt="60" title="60" onclick="init(60)" shape="rect" coords="60,149,238,187" />
+            <area alt="90" title="90" onclick="init(90)" shape="rect" coords="60,195,238,233" />
         </map>
-        <p style="font-size:30px;">Wybierz tryb w którym chcesz grać. <br> Im mniej sekund tym trudniejsza rozgrywka.</p>
+        <p id="p_menu">Wybierz tryb w którym chcesz grać</p>
     </div>
 
 </body>
