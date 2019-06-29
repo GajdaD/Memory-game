@@ -16,9 +16,9 @@
             var menu = document.getElementById("menu") // ukrycie menu
             menu.style.display = "none";
 
-            var trybik = tryb;
+            var tryb_1 = tryb;
             document.querySelector("h1").innerText += " tryb :" + tryb + "s"; // wypisanie trybu gry
-            var tab = ["1.png", "1.png", "2.png", "2.png", "3.png", "3.png", "4.png", "4.png", "5.png", "5.png", "6.png", "6.png", "7.png", "7.png", "8.png", "8.png"]; // pierwsza tablica z wszystkimi obrazkami
+            var tab = ["img/1.png", "img/1.png", "img/2.png", "img/2.png", "img/3.png", "img/3.png", "img/4.png", "img/4.png", "img/5.png", "img/5.png", "img/6.png", "img/6.png", "img/7.png", "img/7.png", "img/8.png", "img/8.png"]; // pierwsza tablica z wszystkimi obrazkami
 
             var el = document.getElementsByTagName("img");
 
@@ -45,7 +45,7 @@
                     klik++; // zwiekszenie klika 
 
                     if (flaga == false) { // sluzy do startu czasu razem z pierwszym klikiem
-                        czasik();
+                        czas();
                         flaga = true;
                     }
                     if (klik == 1) { // jesli jest to pierwszy klikniety obrazek
@@ -126,10 +126,10 @@
 
             }
 
-            function czasik() {
+            function czas() {
 
                 //////
-                var countDownDate = new Date().getTime() + (1000 * trybik); // liczenie ile czasu ma byc
+                var countDownDate = new Date().getTime() + (1000 * tryb_1); // liczenie ile czasu ma byc
                 var tczas = new Date().getTime();
 
                 function zero(i) { // funkcja na wyswitlanie 0 przed
@@ -157,17 +157,17 @@
                         var sec = zero(Math.floor((distance % (1000 * 60)) / 1000)); // to samo dla sekund
                         var msec = zeroms(Math.floor(distance % 1000)) // dla ms
 
-                        var paski = document.getElementById("pasek2")
+                        var timer_2 = document.getElementById("timer_div_2")
 
-                        szer -= (4 / (10 * trybik)); // zmniejszamy o tyle procent 
-                        paski.style.width = szer + "%";
+                        szer -= (4 / (10 * tryb_1)); // zmniejszamy o tyle procent 
+                        timer_2.style.width = szer + "%";
                         if (szer < 0) {
                             szer = 0;
                         }
                         var granica = (distance / 1000) // zamienia na sekundy 
 
-                        if (granica < (trybik / 5)) { // 20 % pozsotalego czasu
-                            paski.style.backgroundColor = "red";
+                        if (granica < (tryb_1 / 5)) { // 20 % pozsotalego czasu
+                            timer_2.style.backgroundColor = "red";
                         }
 
                         if (distance >= 0) {
@@ -185,7 +185,7 @@
 
                             document.querySelector("h2").innerText += " PRZEGRANA "
                             var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
-                            reset.style.display = "block";
+                            reset.style.opacity = 1;
                         }
                         if (tab4.length == 16) { ////// WYGRANA ///////////////////////
                             clearInterval(timer); // zatrzymanie zegara 
@@ -196,7 +196,7 @@
                             var tmsec = zeroms(Math.floor(twojczas % 1000)) // dla ms
                             document.querySelector("h2").innerText += "WYGRANA ! Twój czas : " + tmin + " : " + tsec + " : " + tmsec; // wyswietlenie wygrana i czasu
                             var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
-                            reset.style.display = "block";
+                            reset.style.opacity = 1;
                         }
 
                     }, 1)
@@ -212,14 +212,14 @@
             var main = document.getElementById("main");
             main.style.display = "none"; // ukrycie maina 
             var reset = document.getElementById("reset");
-            reset.style.display = "none"; // ukrycie przycisku reset
-            var paski = document.getElementById("pasek2")
-            paski.style.backgroundColor = "#808080"; // zmiana koloru na standartowy czarny
-            paski.style.width = "100" + "%"; // ustawianie paska timera na cala szerokosc
+            reset.style.opacity = 0; // ukrycie przycisku reset
+            var timer_2 = document.getElementById("timer_div_2")
+            timer_2.style.backgroundColor = "#4E79DB"; // zmiana koloru na standartowy czarny
+            timer_2.style.width = "100" + "%"; // ustawianie paska timera na cala szerokosc
             document.getElementById("timer").innerHTML = ""; // wyczyszczenie napisu z timera
             var el = document.getElementsByTagName("img");
             for (var i = 0; i < 16; i++) { // zakrycie wszystkich obrazkow
-                el[i].src = "0.png";
+                el[i].src = "img/0.png";
             }
         }
     </script>
@@ -232,37 +232,37 @@
     <div id="main" style="display:none;position:relative;">
         <h1>MEMORY</h1>
         <h2></h2>
-        <button id="reset" style="display: none;margin:5px;" onclick="f_reset()">RESET GRY</button>
-        <div id="pasek">
-            <div id="pasek2"> </div>
+        <button id="reset" style="opacity: 0;" onclick="f_reset()">RESET GRY</button>
+        <br>
+        <div id="timer_div">
             <p id="timer"></p>
+            <div id="timer_div_2"> </div>
         </div>
-        <div id="pierwszy">
-            <img src="img/0.png" />
-            <img src="img/0.png" />
-            <img src="img/0.png" />
-            <img src="img/0.png" />
-        </div>
-        <div id="drugi">
+        <br>
+        <div class="img_row">
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
         </div>
-        <div id="trzeci">
+        <div class="img_row">
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
         </div>
-        <div id="czwarty">
+        <div class="img_row">
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
             <img src="img/0.png" />
         </div>
-        <p style="position:absolute;top:5px;left:860px;font-size:26px;">Popularna gra polegająca na odnajdowaniu par takich samych kart. <br> Gracz odsłania 2 karty. <br> Jeśli są to takie same karty, zostaną one odsłonięte, jeśli nie, karty będą odwrócone z powrotem. <br> Celem gracza jest zdjęcie wszystkich kart
-            w najszybszym czasie. <br> </p>
+        <div class="img_row">
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+            <img src="img/0.png" />
+        </div>
     </div>
     <div id="menu">
         <img src="img/menu.png" alt="Error" usemap="#Map" id="img_menu" />
