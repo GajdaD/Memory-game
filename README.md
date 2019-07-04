@@ -2,6 +2,7 @@
 
 https://gajdad.github.io/Memory-game/
 
-Popularna gra polegająca na odnajdowaniu par takich samych kart. 
-Gracz odsłania 2 karty. Jeśli są to takie same karty, zostaną one odsłonięte, jeśli nie, karty będą odwrócone z powrotem. 
-Celem gracza jest zdjęcie wszystkich kart w najszybszym czasie. 
+The popular game of finding pairs of the same cards. The player reverses two cards.
+If they are the same cards, they will be revealed, if not, the cards will be reversed back.
+The player's goal is to reveal all cards in the fastest time.
+
