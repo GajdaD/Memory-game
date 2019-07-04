@@ -8,4 +8,4 @@ The player's goal is to reveal all cards in the fastest time.
 https://gajdad.github.io/Memory-game/
 
 ## 
-![Preview](img/rm_img.png)
+![README screenshot](https://github.com/GajdaD/Memory-game/blob/master/img/rm_img.PNG)
