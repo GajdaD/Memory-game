@@ -38,15 +38,14 @@ function init(param_mode) {
             }
             if (click == 1) {
 
-
                 first_click = el[x];
                 first_click.onclick = function() {
                         return false;
-                    } // zabezpieczenie przed clicknieciem 2 razy w ten sam
+                    } // safeguard on clicking clicked before element
             }
 
-            if (click == 2) { // drugi click
-                for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla clickac innych obrazkow
+            if (click == 2) {
+                for (var i = 0; i < 16; i++) { // safeguard on clicking other elements
 
                     el[i].onclick = function() {
                         return false;
@@ -55,86 +54,75 @@ function init(param_mode) {
 
                 second_click = el[x];
 
-                //    setTimeout(function () { // 600ms oczekiwania 
+                if (tab3.length == 2 && tab3[0].src == tab3[1].src && click == 2) { // the same cards
 
-                if (tab3.length == 2 && tab3[0].src == tab3[1].src && click == 2) { //dobra para
+                    click = 0;
 
-                    click = 0; // powrót z clickiem do wartości 0
+                    tab3.splice(0, 2);
 
-                    tab3.splice(0, 2); // wyczyszczenie tablicy 
-
-                    tab4.push(first_click) // wrzucenie do tablicy odkrytych
-                    tab4.push(second_click) // to samo 
+                    tab4.push(first_click)
+                    tab4.push(second_click)
 
                     setTimeout(function() {
                         for (var i = 0; i < 16; i++) {
-                            el[i].onclick = f(i) // zastosowanie funkcji na click od wszystkich
+                            el[i].onclick = f(i)
 
                         }
-                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed clickaniem w odkryte juz pary
+                        for (var i = 0; i < tab4.length; i++) { // safeguard on clicking revealed elements 
                             tab4[i].onclick = function() {
                                 return false;
                             }
 
-                        } //////////////////////////// 
+                        };
                     }, 600);
-                } ////////////////////////////
+                };
 
-                if (tab3[0] != tab3[1] && click == 2) { //zla para
+                if (tab3[0] != tab3[1] && click == 2) { // wrong pair
 
-                    click = 0; // wyzerowanie clicka 
+                    click = 0;
 
                     setTimeout(function() {
-                        tab3[0].src = tab_0[0]; // zakrycie obrazka
-                        tab3[1].src = tab_0[0]; // też 
-                        tab3.splice(0, 2); // wyczyszczenie tablicy 
+                        tab3[0].src = tab_0[0];
+                        tab3[1].src = tab_0[0];
+                        tab3.splice(0, 2);
 
                         for (var i = 0; i < 16; i++) {
-                            el[i].onclick = f(i) // funkcja do clickania do wszystkich 
-
+                            el[i].onclick = f(i)
                         }
-                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed clickaniem w odkryte juz pary
+                        for (var i = 0; i < tab4.length; i++) { // safeguard on clicking revealed elements
                             tab4[i].onclick = function() {
                                 return false;
                             }
-
-                        } //////////////////////////// 
+                        }
                     }, 600);
-                } ////
-
-                //        }, 600);
-                //////
+                }
             }
-
         }
-
     }
-    for (var i = 0; i < 16; i++) { // zastosowanie funkcji do wszystkich obrazków
+    for (var i = 0; i < 16; i++) {
         el[i].onclick = f(i)
-
     }
 
     function f_time() {
 
-        //////
-        var countDownDate = new Date().getTime() + (1000 * mode); // liczenie ile czasu ma byc
+        var countDownDate = new Date().getTime() + (1000 * mode);
         var tczas = new Date().getTime();
 
-        function zero(i) { // funkcja na wyswitlanie 0 przed
+        function zero(i) { // displaying "0" before
             if (i < 10) {
                 i = "0" + i;
             }
             return i;
         }
 
-        function zeroms(i) { // ta sama tylko dla milisekund
+        function zeroms(i) {
             if (i < 100)
                 i = "0" + i;
             if (i < 10)
                 i = "0" + i;
             return i;
         }
-        var szer = 100; //szerokosc paska 
+        var timer_width = 100;
         var timer = setInterval(function() {
                 var d = new Date(); // data
 
@@ -147,10 +135,10 @@ function init(param_mode) {
 
                 var timer_2 = document.getElementById("timer_div_2")
 
-                szer -= (4 / (10 * mode)); // zmniejszamy o tyle procent 
-                timer_2.style.width = szer + "%";
-                if (szer < 0) {
-                    szer = 0;
+                timer_width -= (4 / (10 * mode)); // zmniejszamy o tyle procent 
+                timer_2.style.width = timer_width + "%";
+                if (timer_width < 0) {
+                    timer_width = 0;
                 }
                 var granica = (distance / 1000) // zamienia na sekundy 
 
@@ -203,7 +191,7 @@ function f_reset() {
     reset.style.opacity = 0; // ukrycie przycisku reset
     var timer_2 = document.getElementById("timer_div_2")
     timer_2.style.backgroundColor = "#4E79DB"; // zmiana koloru na standartowy czarny
-    timer_2.style.width = "100" + "%"; // ustawianie paska timera na cala szerokosc
+    timer_2.style.width = "100" + "%"; // ustawianie paska timera na cala timer_widthokosc
     document.getElementById("timer").innerHTML = ""; // wyczyszczenie napisu z timera
     var el = document.getElementsByTagName("img");
     for (var i = 0; i < 16; i++) { // zakrycie wszystkich obrazkow
