@@ -1,77 +1,77 @@
-function init(tryb) {
-    var main = document.getElementById("main"); // wyswietlenie maina
+function init(param_mode) {
+    var main = document.getElementById("main");
     main.style.display = "block";
-    var menu = document.getElementById("menu") // ukrycie menu
+    var menu = document.getElementById("menu");
     menu.style.display = "none";
 
-    var tryb_1 = tryb;
-    document.querySelector("h1").innerText += " tryb :" + tryb + "s"; // wypisanie trybu gry
-    var tab = ["img/1.png", "img/1.png", "img/2.png", "img/2.png", "img/3.png", "img/3.png", "img/4.png", "img/4.png", "img/5.png", "img/5.png", "img/6.png", "img/6.png", "img/7.png", "img/7.png", "img/8.png", "img/8.png"]; // pierwsza tablica z wszystkimi obrazkami
+    var mode = param_mode;
+    document.querySelector("h1").innerText += " tryb :" + param_mode + "s";
+    var tab = ["img/1.png", "img/1.png", "img/2.png", "img/2.png", "img/3.png", "img/3.png", "img/4.png", "img/4.png", "img/5.png", "img/5.png", "img/6.png", "img/6.png", "img/7.png", "img/7.png", "img/8.png", "img/8.png"];
 
     var el = document.getElementsByTagName("img");
 
-    var tab2 = [] // tablica w ktorej bede pomieszane obrazki
+    var tab2 = [];
 
-    for (var i = 0; i < 16; i++) { // petla ktora miesza
+    for (var i = 0; i < 16; i++) { // mix images in table
 
-        var a = Math.floor((Math.random() * (tab.length)))
-        tab2.push(tab[a]);
-        tab.splice(a, 1);
+        var rand_1 = Math.floor((Math.random() * (tab.length)))
+        tab2.push(tab[rand_1]);
+        tab.splice(rand_1, 1);
 
     }
-    var tab3 = []; // tablica do ktorej wpisujemy dwa wybrane elementy
-    var klik = 0; // zmienna na klik 
-    var tab0 = ["img/0.png"]; // tablica, w ktorej jest tylko "odwrocony" obrazek 
-    var jeden = 0;
-    var dwa = 0;
-    var tab4 = []; // tablica w ktorej wpisujemy odgadniete pary
-    var flaga = false;
+    var tab3 = []; // table for 2 clicked elements
+    var click = 0;
+    var tab_0 = ["img/0.png"];
+    var first_click = 0;
+    var second_click = 0;
+    var tab4 = []; // table for revealed elements
+    var flag_1 = false;
     var f = function(x) {
         return function() {
-            el[x].src = tab2[x]; // odkrycie obrazka
-            tab3.push(this) // wrzucenie do tablicy
-            klik++; // zwiekszenie klika 
+            el[x].src = tab2[x]; // reverse image
+            tab3.push(this)
+            click++;
 
-            if (flaga == false) { // sluzy do startu czasu razem z pierwszym klikiem
-                czas();
-                flaga = true;
+            if (flag_1 == false) { // starting timer
+                f_time();
+                flag_1 = true;
             }
-            if (klik == 1) { // jesli jest to pierwszy klikniety obrazek
+            if (click == 1) {
 
 
-                jeden = el[x];
-                jeden.onclick = function() {
+                first_click = el[x];
+                first_click.onclick = function() {
                         return false;
-                    } // zabezpieczenie przed kliknieciem 2 razy w ten sam
+                    } // zabezpieczenie przed clicknieciem 2 razy w ten sam
             }
 
-            if (klik == 2) { // drugi klik
-                for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla klikac innych obrazkow
+            if (click == 2) { // drugi click
+                for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla clickac innych obrazkow
 
                     el[i].onclick = function() {
                         return false;
                     }
                 }
 
-                dwa = el[x];
+                second_click = el[x];
 
                 //    setTimeout(function () { // 600ms oczekiwania 
 
-                if (tab3.length == 2 && tab3[0].src == tab3[1].src && klik == 2) { //dobra para
+                if (tab3.length == 2 && tab3[0].src == tab3[1].src && click == 2) { //dobra para
 
-                    klik = 0; // powrót z klikiem do wartości 0
+                    click = 0; // powrót z clickiem do wartości 0
 
                     tab3.splice(0, 2); // wyczyszczenie tablicy 
 
-                    tab4.push(jeden) // wrzucenie do tablicy odkrytych
-                    tab4.push(dwa) // to samo 
+                    tab4.push(first_click) // wrzucenie do tablicy odkrytych
+                    tab4.push(second_click) // to samo 
 
                     setTimeout(function() {
                         for (var i = 0; i < 16; i++) {
-                            el[i].onclick = f(i) // zastosowanie funkcji na klik od wszystkich
+                            el[i].onclick = f(i) // zastosowanie funkcji na click od wszystkich
 
                         }
-                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed klikaniem w odkryte juz pary
+                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed clickaniem w odkryte juz pary
                             tab4[i].onclick = function() {
                                 return false;
                             }
@@ -80,20 +80,20 @@ function init(tryb) {
                     }, 600);
                 } ////////////////////////////
 
-                if (tab3[0] != tab3[1] && klik == 2) { //zla para
+                if (tab3[0] != tab3[1] && click == 2) { //zla para
 
-                    klik = 0; // wyzerowanie klika 
+                    click = 0; // wyzerowanie clicka 
 
                     setTimeout(function() {
-                        tab3[0].src = tab0[0]; // zakrycie obrazka
-                        tab3[1].src = tab0[0]; // też 
+                        tab3[0].src = tab_0[0]; // zakrycie obrazka
+                        tab3[1].src = tab_0[0]; // też 
                         tab3.splice(0, 2); // wyczyszczenie tablicy 
 
                         for (var i = 0; i < 16; i++) {
-                            el[i].onclick = f(i) // funkcja do klikania do wszystkich 
+                            el[i].onclick = f(i) // funkcja do clickania do wszystkich 
 
                         }
-                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed klikaniem w odkryte juz pary
+                        for (var i = 0; i < tab4.length; i++) { // zabezpieczenie przed clickaniem w odkryte juz pary
                             tab4[i].onclick = function() {
                                 return false;
                             }
@@ -114,10 +114,10 @@ function init(tryb) {
 
     }
 
-    function czas() {
+    function f_time() {
 
         //////
-        var countDownDate = new Date().getTime() + (1000 * tryb_1); // liczenie ile czasu ma byc
+        var countDownDate = new Date().getTime() + (1000 * mode); // liczenie ile czasu ma byc
         var tczas = new Date().getTime();
 
         function zero(i) { // funkcja na wyswitlanie 0 przed
@@ -147,14 +147,14 @@ function init(tryb) {
 
                 var timer_2 = document.getElementById("timer_div_2")
 
-                szer -= (4 / (10 * tryb_1)); // zmniejszamy o tyle procent 
+                szer -= (4 / (10 * mode)); // zmniejszamy o tyle procent 
                 timer_2.style.width = szer + "%";
                 if (szer < 0) {
                     szer = 0;
                 }
                 var granica = (distance / 1000) // zamienia na sekundy 
 
-                if (granica < (tryb_1 / 5)) { // 20 % pozsotalego czasu
+                if (granica < (mode / 5)) { // 20 % pozsotalego czasu
                     timer_2.style.backgroundColor = "red";
                 }
 
@@ -165,7 +165,7 @@ function init(tryb) {
                 if (distance < 0 && tab3.length != 2) { // jesli sie skonczy odliczanie ///////// PRZEGRANA 
                     clearInterval(timer);
                     document.getElementById("timer").innerHTML = "KONIEC"; // napis na zegarze koniec
-                    for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla klikac innych obrazkow
+                    for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla clickac innych obrazkow
                         el[i].onclick = function() {
                             return false;
                         }
