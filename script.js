@@ -124,77 +124,75 @@ function init(param_mode) {
         }
         var timer_width = 100;
         var timer = setInterval(function() {
-                var d = new Date(); // data
+            var d = new Date(); // date
 
-                var now = d.getTime(); // teraz 
+            var now = d.getTime();
 
-                var distance = countDownDate - now; //roznica pomiedzy teraz a tym ile chcemy
-                var min = zero(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
-                var sec = zero(Math.floor((distance % (1000 * 60)) / 1000)); // to samo dla sekund
-                var msec = zeroms(Math.floor(distance % 1000)) // dla ms
+            var distance = countDownDate - now;
+            var min = zero(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            var sec = zero(Math.floor((distance % (1000 * 60)) / 1000));
+            var msec = zeroms(Math.floor(distance % 1000))
 
-                var timer_2 = document.getElementById("timer_div_2")
+            var timer_2 = document.getElementById("timer_div_2")
 
-                timer_width -= (4 / (10 * mode)); // zmniejszamy o tyle procent 
-                timer_2.style.width = timer_width + "%";
-                if (timer_width < 0) {
-                    timer_width = 0;
-                }
-                var granica = (distance / 1000) // zamienia na sekundy 
+            timer_width -= (4 / (10 * mode));
+            timer_2.style.width = timer_width + "%";
+            if (timer_width < 0) {
+                timer_width = 0;
+            }
+            var border = (distance / 1000);
 
-                if (granica < (mode / 5)) { // 20 % pozsotalego czasu
-                    timer_2.style.backgroundColor = "red";
-                }
+            if (border < (mode / 5)) { // 20 % time left
+                timer_2.style.backgroundColor = "red";
+            }
 
-                if (distance >= 0) {
-                    document.getElementById("timer").innerHTML = min + " : " + sec + " : " + msec; // wyswietlanie czasu
+            if (distance >= 0) {
+                document.getElementById("timer").innerHTML = min + " : " + sec + " : " + msec;
 
-                }
-                if (distance < 0 && tab3.length != 2) { // jesli sie skonczy odliczanie ///////// PRZEGRANA 
-                    clearInterval(timer);
-                    document.getElementById("timer").innerHTML = "KONIEC"; // napis na zegarze koniec
-                    for (var i = 0; i < 16; i++) { // zabezpieczenie zeby nie mozna byla clickac innych obrazkow
-                        el[i].onclick = function() {
-                            return false;
-                        }
+            }
+            if (distance < 0 && tab3.length != 2) { // Defeat 
+                clearInterval(timer);
+                document.getElementById("timer").innerHTML = "KONIEC";
+                for (var i = 0; i < 16; i++) {
+                    el[i].onclick = function() {
+                        return false;
                     }
-
-                    document.querySelector("h2").innerText += " PRZEGRANA "
-                    var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
-                    reset.style.opacity = 1;
                 }
-                if (tab4.length == 16) { ////// WYGRANA ///////////////////////
-                    clearInterval(timer); // zatrzymanie zegara 
-                    var tczaskoniec = new Date().getTime(); // czas na koniec
-                    var twojczas = tczaskoniec - tczas // twoj czas
-                    var tmin = zero(Math.floor((twojczas % (1000 * 60 * 60)) / (1000 * 60))); // obliczanie ile jest min 
-                    var tsec = zero(Math.floor((twojczas % (1000 * 60)) / 1000)); // to samo dla sekund
-                    var tmsec = zeroms(Math.floor(twojczas % 1000)) // dla ms
-                    document.querySelector("h2").innerText += "WYGRANA ! Twój czas : " + tmin + " : " + tsec + " : " + tmsec; // wyswietlenie wygrana i czasu
-                    var reset = document.getElementById("reset"); // wyswietlenie przycisku reset
-                    reset.style.opacity = 1;
-                }
+                document.querySelector("h2").innerText += " PRZEGRANA "
+                var reset = document.getElementById("reset");
+                reset.style.opacity = 1;
+            }
+            if (tab4.length == 16) { // Win
+                clearInterval(timer); // Stop timer
+                var time_finish = new Date().getTime();
+                var your_time = time_finish - tczas;
+                var tmin = zero(Math.floor((your_time % (1000 * 60 * 60)) / (1000 * 60)));
+                var tsec = zero(Math.floor((your_time % (1000 * 60)) / 1000));
+                var tmsec = zeroms(Math.floor(your_time % 1000));
+                document.querySelector("h2").innerText += "WYGRANA ! Twój czas : " + tmin + " : " + tsec + " : " + tmsec;
+                var reset = document.getElementById("reset");
+                reset.style.opacity = 1;
+            }
 
-            }, 1)
-            /////////////////////////////////////////////////////////////
+        }, 1)
     }
+}
 
-} //koniec init
 function f_reset() {
-    document.querySelector("h2").innerText = ""; //wyczyszczenie napisu
-    document.querySelector("h1").innerText = "MEMORY"; // wrocenie do samego napisu memory
+    document.querySelector("h2").innerText = "";
+    document.querySelector("h1").innerText = "MEMORY";
     var menu = document.getElementById("menu")
-    menu.style.display = "block"; // pokazanie menu z wyborem trybu
+    menu.style.display = "block";
     var main = document.getElementById("main");
-    main.style.display = "none"; // ukrycie maina 
+    main.style.display = "none";
     var reset = document.getElementById("reset");
-    reset.style.opacity = 0; // ukrycie przycisku reset
+    reset.style.opacity = 0;
     var timer_2 = document.getElementById("timer_div_2")
-    timer_2.style.backgroundColor = "#4E79DB"; // zmiana koloru na standartowy czarny
-    timer_2.style.width = "100" + "%"; // ustawianie paska timera na cala timer_widthokosc
-    document.getElementById("timer").innerHTML = ""; // wyczyszczenie napisu z timera
+    timer_2.style.backgroundColor = "#4E79DB";
+    timer_2.style.width = "100" + "%";
+    document.getElementById("timer").innerHTML = "";
     var el = document.getElementsByTagName("img");
-    for (var i = 0; i < 16; i++) { // zakrycie wszystkich obrazkow
+    for (var i = 0; i < 16; i++) {
         el[i].src = "img/0.png";
     }
 }
